@@ -52,14 +52,14 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginUserDto user) {
+	public ResponseEntity<?> login(@RequestBody LoginUserDto userDto) {
 		try {
 			
-		if (!userService.userExist(user.getUsername()))
+		if (userService.userExist(userDto.getUsername()))
 			return new ResponseEntity<>("No Account Found, Please Register", HttpStatus.NO_CONTENT);
 		
-		if (userService.checkLogin(user.getUsername(), user.getPassword()))
-			return new ResponseEntity<>(transectionService.getTransectionHistory(user.getUsername()),HttpStatus.OK);
+		if (userService.checkLogin(userDto.getUsername(), userDto.getPassword()))
+			return new ResponseEntity<>(transectionService.getTransectionHistory(userDto.getUsername()),HttpStatus.OK);
 		 else 
 			return new ResponseEntity<>("Username & Password is Incorrect", HttpStatus.UNAUTHORIZED);
 			

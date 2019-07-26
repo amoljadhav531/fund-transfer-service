@@ -53,8 +53,8 @@ public class TransectionService {
 	 * @return
 	 */
 	public List<TransactionHistory> getTransectionHistory(String userName) {
-		Pageable byDate = PageRequest.of(0, 2, Sort.by("date").descending());
-		return transectionRepository.findAllByUsername(userName, byDate);
+		UserDetails userDetails = userRepository.findByUsername(userName);
+		return userDetails.getAccount().getTransactionHistories();
 	}
 
 	/**

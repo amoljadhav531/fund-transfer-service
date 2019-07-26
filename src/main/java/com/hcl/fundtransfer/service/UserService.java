@@ -11,6 +11,8 @@ import com.hcl.fundtransfer.entity.UserDetails;
 import com.hcl.fundtransfer.repository.AccountRepository;
 import com.hcl.fundtransfer.repository.UserRepository;
 
+import net.bytebuddy.asm.Advice.Return;
+
 /**
  * UserService class used for to serve the user registration and login operation
  * 
@@ -58,7 +60,9 @@ public class UserService {
 	 * @return
 	 */
 	public boolean userExist(String userName) {
-		return userRepository.existsById(111l);
+		 if(ObjectUtils.isEmpty(userRepository.findByUsername(userName)))
+				return false;
+		 return true;
 	}
 
 	/**
