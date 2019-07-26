@@ -17,8 +17,8 @@ import org.springframework.util.ObjectUtils;
 
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.TransactionHistory;
-import com.hcl.fundtransfer.model.FundTransfer;
-import com.hcl.fundtransfer.model.Payee;
+import com.hcl.fundtransfer.model.FundTransferDto;
+import com.hcl.fundtransfer.model.PayeeDto;
 import com.hcl.fundtransfer.repository.AccountRepository;
 import com.hcl.fundtransfer.repository.TransectionRepository;
 
@@ -51,8 +51,8 @@ public class TransectionService {
 	 * @param userName login user user-name
 	 * @return
 	 */
-	public List<Payee> getAllPayees(String userName) {
-		List<Payee> payees = new ArrayList<>();
+	public List<PayeeDto> getAllPayees(String userName) {
+		List<PayeeDto> payees = new ArrayList<>();
 
 		List<Object[]> resultSet = accountRepository.getUserNameAndAccountNumbers(userName);
 
@@ -60,7 +60,7 @@ public class TransectionService {
 			resultSet.stream().forEach(a -> {
 				String column1 = (String) a[0];
 				long column2 = (long) a[1];
-				Payee payee = new Payee(column1, column2);
+				PayeeDto payee = new PayeeDto(column1, column2);
 				payees.add(payee);
 			});
 		}
@@ -75,7 +75,7 @@ public class TransectionService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public void fundTransfer(FundTransfer fundTransfer) throws Exception {
+	public void fundTransfer(FundTransferDto fundTransfer) throws Exception {
 		try {
 			Account loginUserAccount = accountRepository.findByUsername(fundTransfer.getLoginUserName());
 			Account payeeUserAccount = accountRepository.findById(fundTransfer.getPayee().getAccountNumber()).get();

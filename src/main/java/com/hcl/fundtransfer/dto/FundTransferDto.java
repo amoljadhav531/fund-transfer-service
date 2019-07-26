@@ -1,4 +1,4 @@
-package com.hcl.fundtransfer.model;
+package com.hcl.fundtransfer.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
  * FundTransfer class used as request body model
  * @author amol.jadhav
  */
-public class FundTransfer {
+public class FundTransferDto {
 
 	@NotNull
 	@NotBlank
 	private String loginUserName;
 	
 	@NotNull
-	private Payee payee;
+	private PayeeDto payee;
 	
 	@NotNull
 	private double amount;
@@ -30,11 +30,11 @@ public class FundTransfer {
 		this.loginUserName = loginUserName;
 	}
 
-	public Payee getPayee() {
+	public PayeeDto getPayee() {
 		return payee;
 	}
 
-	public void setPayee(Payee payee) {
+	public void setPayee(PayeeDto payee) {
 		this.payee = payee;
 	}
 

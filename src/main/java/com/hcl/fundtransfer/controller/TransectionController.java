@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.fundtransfer.model.FundTransfer;
-import com.hcl.fundtransfer.model.Payee;
+import com.hcl.fundtransfer.model.FundTransferDto;
+import com.hcl.fundtransfer.model.PayeeDto;
 import com.hcl.fundtransfer.service.TransectionService;
 
 /**
@@ -39,7 +39,7 @@ public class TransectionController {
 	 * @return List<Payee> List of payee objects
 	 */
 	@GetMapping("/payees/{userName}")
-	public  ResponseEntity<List<Payee>> getAllPayees(@PathVariable @NotBlank @Size(max = 15) String userName){
+	public  ResponseEntity<List<PayeeDto>> getAllPayees(@PathVariable @NotBlank @Size(max = 15) String userName){
 		return new ResponseEntity<>(transectionService.getAllPayees(userName),HttpStatus.OK);
 	}
 	
@@ -49,7 +49,7 @@ public class TransectionController {
 	 * @return
 	 */
 	@PostMapping("/fundtransfer")
-	public ResponseEntity<?> fundTransfer(@Valid @RequestBody FundTransfer fundTransfer){
+	public ResponseEntity<?> fundTransfer(@Valid @RequestBody FundTransferDto fundTransfer){
 		try {
 		 transectionService.fundTransfer(fundTransfer);
 		 return new ResponseEntity<>("Transection Successful", HttpStatus.OK);

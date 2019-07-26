@@ -1,23 +1,23 @@
-package com.hcl.fundtransfer.model;
+package com.hcl.fundtransfer.dto;
 
 /**
  * Payee class used as request body model
  * @author amol.jadhav
  */
-public class Payee {
+public class PayeeDto {
 
 	private String userName;
 	
 	private long accountNumber;
 	
 
-	public Payee(String userName, long accountNumber) {
+	public PayeeDto(String userName, long accountNumber) {
 		super();
 		this.userName = userName;
 		this.accountNumber = accountNumber;
 	}
 	
-	public Payee() {
+	public PayeeDto() {
 		super();
 	}
 

@@ -1,4 +1,4 @@
-package com.hcl.fundtransfer.model;
+package com.hcl.fundtransfer.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
  * LoginUser class used as request body model
  * @author amol.jadhav
  */
-public class LoginUser {
+public class LoginUserDto {
 
 	@NotNull
 	@NotBlank
