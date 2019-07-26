@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.fundtransfer.entity.Account;
-import com.hcl.fundtransfer.entity.User;
+import com.hcl.fundtransfer.entity.UserDetails;
 import com.hcl.fundtransfer.model.LoginUser;
 import com.hcl.fundtransfer.service.TransectionService;
 import com.hcl.fundtransfer.service.UserService;
@@ -37,7 +37,7 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@Valid @RequestBody User user) {	
+	public ResponseEntity<?> register(@Valid @RequestBody UserDetails user) {	
 		
 		if(user.getPassword().equals(user.getConformPassword()))			
 			return new ResponseEntity<Account>(userService.registerUser(user), HttpStatus.OK);

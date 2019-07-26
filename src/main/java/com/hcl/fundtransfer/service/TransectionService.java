@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.hcl.fundtransfer.entity.Account;
-import com.hcl.fundtransfer.entity.TransactionDetails;
+import com.hcl.fundtransfer.entity.TransactionHistory;
 import com.hcl.fundtransfer.model.FundTransfer;
 import com.hcl.fundtransfer.model.Payee;
 import com.hcl.fundtransfer.repository.AccountRepository;
@@ -41,7 +41,7 @@ public class TransectionService {
 	 * @param page paging object
 	 * @return
 	 */
-	public List<TransactionDetails> getTransectionHistory(String userName) {
+	public List<TransactionHistory> getTransectionHistory(String userName) {
 		Pageable byDate = PageRequest.of(0, 2,Sort.by("date").descending());
 		return transectionRepository.findAllByUsername(userName,byDate);
 	}
@@ -85,8 +85,8 @@ public class TransectionService {
 			loginUserAccount.setBalance(loginUserAccount.getBalance() - fundTransfer.getAmount());
 			accountRepository.save(loginUserAccount);
 
-			TransactionDetails loginUserTransectionDetails = new TransactionDetails();
-			TransactionDetails payeeUserTransectionDetails = new TransactionDetails();
+			TransactionHistory loginUserTransectionDetails = new TransactionHistory();
+			TransactionHistory payeeUserTransectionDetails = new TransactionHistory();
 
 			loginUserTransectionDetails.setAccountNumber(loginUserAccount.getAccountNumber());
 			loginUserTransectionDetails.setBalance(loginUserAccount.getBalance());

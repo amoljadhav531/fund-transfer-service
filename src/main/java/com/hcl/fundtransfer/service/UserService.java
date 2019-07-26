@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.hcl.fundtransfer.entity.Account;
-import com.hcl.fundtransfer.entity.User;
+import com.hcl.fundtransfer.entity.UserDetails;
 import com.hcl.fundtransfer.repository.AccountRepository;
 import com.hcl.fundtransfer.repository.UserRepository;
 
@@ -27,7 +27,7 @@ public class UserService {
 	 * @param user contain details for registration and account creation
 	 * @return Account details
 	 */
-	public Account registerUser(User user) {
+	public Account registerUser(UserDetails user) {
 
 		Account accountDetail = new Account();
 		try {
