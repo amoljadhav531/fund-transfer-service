@@ -22,7 +22,7 @@ public class InterestScheduler {
 	/**
 	 * Method used to schedule yearly interest
 	 */
-	@Scheduled(fixedRate = 60000)
+	//@Scheduled(fixedRate = 60000)
 	public void scheduleInerest() {
 		List<Account> accounts = accountRepository.findAll();	
 		accounts.stream().forEach(acc -> acc.setBalance(acc.getBalance() +(acc.getBalance() *0.10)));		
