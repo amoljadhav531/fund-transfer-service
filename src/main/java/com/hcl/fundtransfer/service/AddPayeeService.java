@@ -17,10 +17,13 @@ import com.hcl.fundtransfer.repository.UserRepository;
 public class AddPayeeService {
 
 	@Autowired
-	PayeeRepository payeeRepository;
+	private PayeeRepository payeeRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
+	
+	@Autowired
+	private OtpSenderUtility otpSenderUtility;
 
 	public ResponseData addPayee(PayeeDto payeeDto) {
 
@@ -34,8 +37,10 @@ public class AddPayeeService {
 			payee.setPayeeId(payeeDetails.get());
 			payee.setOtp(generateOtp());
 			payee.setStatus("PENDING");
-			payeeRepository.save(payee);
+			payee = payeeRepository.save(payee);
 
+			otpSenderUtility.sendNotification(payee);
+			
 			response.setMessage("OTP has been send to your Mobile No and Email");
 			response.setHttpStatus(HttpStatus.OK);
 			return response;
