@@ -10,7 +10,7 @@ import com.hcl.fundtransfer.entity.UserDetails;
  * @author amol.jadhav
  */
 @Repository
-public interface UserRepository extends JpaRepository<UserDetails, String>{
+public interface UserRepository extends JpaRepository<UserDetails, Long>{
 
 	/**
 	 * Method return User based on user-name and password
