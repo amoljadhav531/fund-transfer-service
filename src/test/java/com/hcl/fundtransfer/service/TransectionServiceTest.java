@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +15,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.hcl.fundtransfer.dto.ResponseData;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.UserDetails;
 import com.hcl.fundtransfer.repository.PayeeRepository;
+import com.hcl.fundtransfer.repository.UserRepository;
+import com.jayway.jsonpath.Option;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TransectionServiceTest {
@@ -27,6 +31,9 @@ public class TransectionServiceTest {
 	
 	@Mock
 	PayeeRepository payeeRepository;
+	
+	@Mock
+	UserRepository userRepository;
 	
 	@InjectMocks
 	TransectionService transectionService;
@@ -52,13 +59,15 @@ public class TransectionServiceTest {
 		
 		list = new ArrayList<>();
 		list.add(user);
+		
 	}
 
 	@Test
 	public void test() {
+		Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 		Mockito.when(payeeRepository.findByUserId(1L)).thenReturn(list);
-		List<UserDetails> actualList = transectionService.getAllPayees(1L);
-		assertEquals(list, actualList);
+		ResponseData actualList = transectionService.getAllPayees(1L);
+		assertEquals(list, actualList.getData());
 	}
 
 }
