@@ -3,6 +3,8 @@ package com.hcl.fundtransfer.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import com.hcl.fundtransfer.dto.PayeeDto;
 import com.hcl.fundtransfer.dto.ResponseData;
@@ -12,6 +14,7 @@ import com.hcl.fundtransfer.exception.ResourceNotFoundException;
 import com.hcl.fundtransfer.repository.PayeeRepository;
 import com.hcl.fundtransfer.repository.UserRepository;
 
+@Service
 public class PayeeServiceImpl implements PayeeService {
 
 	@Autowired
@@ -31,14 +34,17 @@ public class PayeeServiceImpl implements PayeeService {
 			if (user == null) {
 				throw new ResourceNotFoundException("User is not present for this payee Id");
 			} else {
-				 payeeRepository.deleteById(payee2.getPayeeTrackId());
+				payeeRepository.deleteById(payee2.getPayeeTrackId());
 			}
 
 		} else {
 			throw new ResourceNotFoundException("Please enter proper User Id");
 		}
-		
-		return null;
+
+		ResponseData responseData = new ResponseData();
+		responseData.setHttpStatus(HttpStatus.OK);
+		responseData.setMessage("your otp has been send to your mobile number");
+		return responseData;
 	}
 
 }
