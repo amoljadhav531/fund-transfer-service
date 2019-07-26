@@ -1,5 +1,6 @@
 package com.hcl.fundtransfer.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -54,14 +55,10 @@ public class UserDetails {
 	private String gender;
 	
 	@NotNull
-	@NotBlank
-	private String dob;
+	private LocalDate dob;
 	
 	@OneToOne(mappedBy = "userDetails")
 	@JsonIgnore
 	private Account account;
 	
-	@OneToMany(mappedBy = "userId")
-	@JsonIgnore
-	private List<Payee> payees;
 }
