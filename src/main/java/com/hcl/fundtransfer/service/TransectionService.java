@@ -2,7 +2,6 @@ package com.hcl.fundtransfer.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +60,6 @@ public class TransectionService {
 	 */
 	@Transactional
 	public void fundTransfer(FundTransferDto fundTransfer) throws Exception {
-		try {
 			Optional<UserDetails> loginUserDetails = userRepository.findById(fundTransfer.getUserId());
 			Optional<UserDetails> payeeUserDetails = userRepository.findById(fundTransfer.getPayeeId());
 			if (loginUserDetails.isPresent() && payeeUserDetails.isPresent()) {
@@ -93,9 +91,6 @@ public class TransectionService {
 
 			}
 
-		} catch (Exception ex) {
-			throw new Exception("Opertation unsccessful");
-		}
 	}
 
 	/**
@@ -106,14 +101,11 @@ public class TransectionService {
 	private String getCurrentDateTime() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		String formattedDate = dateFormat.format(date);
-		return formattedDate;
+		return dateFormat.format(date);
 	}
 
 	public List<UserDetails> getAllPayees(Long userId) {
-		List<UserDetails> payees = new ArrayList<>();
-		payees = payeeRepository.findByUserId(userId);
-		return payees;
+		return payeeRepository.findByUserId(userId);
 
 	}
 }

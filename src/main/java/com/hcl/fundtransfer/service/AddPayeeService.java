@@ -10,7 +10,6 @@ import com.hcl.fundtransfer.dto.PayeeDto;
 import com.hcl.fundtransfer.dto.ResponseData;
 import com.hcl.fundtransfer.entity.Payee;
 import com.hcl.fundtransfer.entity.UserDetails;
-import com.hcl.fundtransfer.exception.ResourceNotFoundException;
 import com.hcl.fundtransfer.repository.PayeeRepository;
 import com.hcl.fundtransfer.repository.UserRepository;
 

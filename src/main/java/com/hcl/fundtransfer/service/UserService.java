@@ -8,10 +8,7 @@ import org.springframework.util.ObjectUtils;
 import com.hcl.fundtransfer.dto.UserDetailsDto;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.UserDetails;
-import com.hcl.fundtransfer.repository.AccountRepository;
 import com.hcl.fundtransfer.repository.UserRepository;
-
-import net.bytebuddy.asm.Advice.Return;
 
 /**
  * UserService class used for to serve the user registration and login operation
@@ -24,9 +21,6 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private AccountRepository accountRepository;
-
 	/**
 	 * Method used to register the user and create its account
 	 * 
@@ -37,7 +31,7 @@ public class UserService {
 
 		UserDetails userDetails = new UserDetails();
 		Account account = new Account();
-		try {
+
 			BeanUtils.copyProperties(user, userDetails);
 
 			account.setAccountNumber(generateAccountNumber());
@@ -46,10 +40,7 @@ public class UserService {
 			account.setUserDetails(userDetails);
 			userDetails.setAccount(account);
 			account = userRepository.save(userDetails).getAccount();
-
-		} catch (Exception ex) {
-
-		}
+			
 		return account;
 	}
 
@@ -60,9 +51,7 @@ public class UserService {
 	 * @return
 	 */
 	public boolean userExist(String userName) {
-		 if(ObjectUtils.isEmpty(userRepository.findByUsername(userName)))
-				return false;
-		 return true;
+		 return ObjectUtils.isEmpty(userRepository.findByUsername(userName));
 	}
 
 	/**
@@ -73,10 +62,7 @@ public class UserService {
 	 * @return
 	 */
 	public boolean checkLogin(String userName, String password) {
-		if (ObjectUtils.isEmpty(userRepository.findByUsernameAndPassword(userName, password)))
-			return false;
-
-		return true;
+		return ObjectUtils.isEmpty(userRepository.findByUsernameAndPassword(userName, password));
 	}
 
 	/**
