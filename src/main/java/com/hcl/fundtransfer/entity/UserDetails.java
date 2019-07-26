@@ -42,7 +42,7 @@ public class UserDetails {
 	private String fullName;
 	
 	@NotNull
-	private long mobileNumber;
+	private String mobileNumber;
 	
 	@NotNull
 	@NotBlank

@@ -25,7 +25,7 @@ public class UserDetailsDto {
 	private String fullName;
 	
 	@NotNull
-	private long mobileNumber;
+	private String mobileNumber;
 	
 	@NotNull
 	@NotBlank
