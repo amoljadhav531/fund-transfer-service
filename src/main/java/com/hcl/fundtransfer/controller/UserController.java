@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.fundtransfer.dto.LoginUserDto;
 import com.hcl.fundtransfer.dto.UserDetailsDto;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.UserDetails;
-import com.hcl.fundtransfer.model.LoginUserDto;
 import com.hcl.fundtransfer.service.TransectionService;
 import com.hcl.fundtransfer.service.UserService;
 
