@@ -26,8 +26,6 @@ public class TransactionHistory {
 	
 	private String date;
 	
-	private long accountNumber;
-	
 	private String transactionType;
 
 	private double amount;
