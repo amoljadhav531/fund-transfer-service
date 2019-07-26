@@ -52,7 +52,7 @@ public class TransectionServiceTest {
 		user.setEmail("simarkaur1295@gmail.com");
 		user.setFullName("Harsimar Kaur");
 		user.setGender("Female");
-		user.setMobileNumber(9422390512L);
+		user.setMobileNumber("9422390512");
 		user.setPassword("password");
 		user.setUserId(1L);
 		user.setUsername("harsimar.kaur");
