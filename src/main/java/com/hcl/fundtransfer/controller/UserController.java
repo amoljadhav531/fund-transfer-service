@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.fundtransfer.dto.LoginUserDto;
 import com.hcl.fundtransfer.dto.UserDetailsDto;
 import com.hcl.fundtransfer.entity.Account;
-import com.hcl.fundtransfer.entity.UserDetails;
 import com.hcl.fundtransfer.service.TransectionService;
 import com.hcl.fundtransfer.service.UserService;
 
@@ -38,12 +37,12 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@Valid @RequestBody UserDetailsDto user) {	
+	public ResponseEntity<Object> register(@Valid @RequestBody UserDetailsDto user) {	
 		
 		if(user.getPassword().equals(user.getConfirmPassword()))			
-			return new ResponseEntity<Account>(userService.registerUser(user), HttpStatus.OK);
+			return new ResponseEntity<>(userService.registerUser(user), HttpStatus.OK);
 					
-	  return new ResponseEntity<String>("Your conform password is not matching with password", HttpStatus.BAD_REQUEST);
+	  return new ResponseEntity<>("Your conform password is not matching with password", HttpStatus.BAD_REQUEST);
 	}
 	
 	/**
@@ -52,17 +51,17 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginUserDto userDto) {
+	public ResponseEntity<Object> login(@RequestBody LoginUserDto userDto) {
 		try {
 			
-		if (userService.userExist(userDto.getUsername()))
-			return new ResponseEntity<>("No Account Found, Please Register", HttpStatus.NO_CONTENT);
-		
-		if (userService.checkLogin(userDto.getUsername(), userDto.getPassword()))
-			return new ResponseEntity<>(transectionService.getTransectionHistory(userDto.getUsername()),HttpStatus.OK);
-		 else 
-			return new ResponseEntity<>("Username & Password is Incorrect", HttpStatus.UNAUTHORIZED);
+			if (userService.userExist(userDto.getUsername()))
+				return new ResponseEntity<>("No Account Found, Please Register", HttpStatus.NO_CONTENT);
 			
+			if (userService.checkLogin(userDto.getUsername(), userDto.getPassword()))
+				return new ResponseEntity<>(transectionService.getTransectionHistory(userDto.getUsername()),HttpStatus.OK);
+			else {
+				return new ResponseEntity<>("Username & Password is Incorrect", HttpStatus.UNAUTHORIZED);
+			}
 		} catch (Exception e) {
 			return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -11,5 +11,5 @@ import lombok.Data;
 public class PayeeDto {
 
 	private Long payeeId;
-	private Long UserId;
+	private Long userId;
 }

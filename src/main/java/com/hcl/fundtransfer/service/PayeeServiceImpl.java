@@ -12,7 +12,6 @@ import com.hcl.fundtransfer.entity.Payee;
 import com.hcl.fundtransfer.entity.UserDetails;
 import com.hcl.fundtransfer.exception.ResourceNotFoundException;
 import com.hcl.fundtransfer.repository.PayeeRepository;
-import com.hcl.fundtransfer.repository.UserRepository;
 
 @Service
 public class PayeeServiceImpl implements PayeeService {
@@ -20,12 +19,8 @@ public class PayeeServiceImpl implements PayeeService {
 	@Autowired
 	private PayeeRepository payeeRepository;
 
-	@Autowired
-	private UserRepository userRepository;
-
 	@Override
 	public ResponseData deletePayee(PayeeDto payeeDto) {
-		Long userId = payeeDto.getUserId();
 		Long payeeId = payeeDto.getPayeeId();
 		Optional<Payee> payee = payeeRepository.findById(payeeId);
 		if (payee.isPresent()) {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.fundtransfer.dto.PayeeDto;
+import com.hcl.fundtransfer.dto.ResponseData;
 import com.hcl.fundtransfer.service.PayeeService;
 
 @RestController
@@ -19,9 +20,9 @@ public class PayeeController {
 	private PayeeService payeeService;
 
 	@DeleteMapping("/payee")
-	public ResponseEntity<?> deletePayee(@RequestBody PayeeDto payeeDto) {
+	public ResponseEntity<ResponseData> deletePayee(@RequestBody PayeeDto payeeDto) {
 
-		return new ResponseEntity<Object>(payeeService.deletePayee(payeeDto), HttpStatus.OK);
+		return new ResponseEntity<>(payeeService.deletePayee(payeeDto), HttpStatus.OK);
 	}
 
 }

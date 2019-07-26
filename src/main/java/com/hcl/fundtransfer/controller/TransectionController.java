@@ -1,11 +1,7 @@
 package com.hcl.fundtransfer.controller;
 
-import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +48,7 @@ public class TransectionController {
 	 * @return
 	 */
 	@PostMapping("/fundtransfer")
-	public ResponseEntity<?> fundTransfer(@Valid @RequestBody FundTransferDto fundTransfer) {
+	public ResponseEntity<Object> fundTransfer(@Valid @RequestBody FundTransferDto fundTransfer) {
 		try {
 			transectionService.fundTransfer(fundTransfer);
 			return new ResponseEntity<>("Transection Successful", HttpStatus.OK);
