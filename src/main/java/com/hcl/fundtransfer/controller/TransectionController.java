@@ -1,6 +1,5 @@
 package com.hcl.fundtransfer.controller;
 
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.fundtransfer.dto.FundTransferDto;
+import com.hcl.fundtransfer.dto.ResponseData;
 import com.hcl.fundtransfer.service.TransectionService;
 
 /**
@@ -29,18 +29,18 @@ public class TransectionController {
 	@Autowired
 	private TransectionService transectionService;
 
-	
 	/**
 	 * Method used for API mapping to URL /payees/{userName}
+	 * 
 	 * @param userName login user name
 	 * @return List<Payee> List of payee objects
 	 */
 	@GetMapping("/payee/{userId}")
-	public  ResponseEntity<Object> getAllPayees(@PathVariable Long userId){
-		return new ResponseEntity<>(transectionService.getAllPayees(userId),HttpStatus.OK);
+	public ResponseEntity<Object> getAllPayees(@PathVariable Long userId) {
+		ResponseData response = transectionService.getAllPayees(userId);
+		return new ResponseEntity<>(response, response.getHttpStatus());
 	}
-	
-	
+
 	/**
 	 * Method used for API mapping to URL /fundtransfer
 	 * 
