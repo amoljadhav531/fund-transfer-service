@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.fundtransfer.dto.OtpValidationDto;
 import com.hcl.fundtransfer.dto.ResponseData;
-import com.hcl.fundtransfer.service.ValidateService;
+import com.hcl.fundtransfer.service.TransactionValidationService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,15 +21,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/payee")
 
 @CrossOrigin
-public class OtpValidationController {
+public class TransactionValidationController {
 
 	@Autowired
-	private ValidateService validateServiceImpl;
+	private TransactionValidationService transactionValidationService;
 
 	@PostMapping("/confirm")
 	public ResponseEntity<Object> validate(OtpValidationDto otpValidationDto) {
 		log.debug("entering into validate method============>>>>>>>>>>>");
-		ResponseData response = validateServiceImpl.validate(otpValidationDto.getOtp(),
+		ResponseData response = transactionValidationService.validate(otpValidationDto.getOtp(),
 				otpValidationDto.getPayeeTrackId());
 		log.debug("existing  from validate============>>>>>>>>>>>");
 		return new ResponseEntity<>(response, response.getHttpStatus());
