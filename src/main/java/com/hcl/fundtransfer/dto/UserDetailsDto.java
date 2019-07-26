@@ -18,34 +18,39 @@ import lombok.Data;
 
 /**
  * User class represent the user table in database
+ * 
  * @author amol.jadhav
  */
 @Data
 public class UserDetailsDto {
-	
+
 	private String username;
-	
+
+	@NotNull
+	@NotBlank
 	private String password;
-	
+
+	@NotNull
+	@NotBlank
 	private String conformPassword;
-	
+
 	@NotNull
 	@NotBlank
 	private String fullName;
-	
+
 	@NotNull
 	private long mobileNumber;
-	
+
 	@NotNull
 	@NotBlank
 	private String email;
-	
+
 	@NotNull
 	@NotBlank
 	private String gender;
-	
+
 	@NotNull
 	@NotBlank
 	private LocalDate dob;
-	
+
 }
