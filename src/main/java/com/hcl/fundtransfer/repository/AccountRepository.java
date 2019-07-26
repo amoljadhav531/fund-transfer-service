@@ -16,18 +16,4 @@ import com.hcl.fundtransfer.entity.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long>{
 
-	/**
-	 * Method returns Account table recored matched with given username
-	 * @param username login user-name
-	 * @return Account object
-	 */
-	public Account findByUsername(String username);
-	
-	/**
-	 * Method returns user name and account number for reach user
-	 * @param userName login user name
-	 * @return List<Object[]> object
-	 */
-	@Query("SELECT username,accountNumber from Account WHERE username !=:userName")
-	public List<Object[]> getUserNameAndAccountNumbers(@Param("userName") String userName);
 }
