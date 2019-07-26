@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.fundtransfer.dto.PayeeDto;
+import com.hcl.fundtransfer.dto.ResponseData;
 import com.hcl.fundtransfer.entity.Payee;
 import com.hcl.fundtransfer.service.AddPayeeService;
 
@@ -25,8 +26,9 @@ public class AddPayeeController {
 	private AddPayeeService addPayeeService;
 	
 	@PostMapping("/payee")
-	public ResponseEntity<Payee> addPayee(@RequestBody PayeeDto payeeDto){
-		return new ResponseEntity<>(addPayeeService.addPayee(payeeDto), HttpStatus.OK);
+	public ResponseEntity<Object> addPayee(@RequestBody PayeeDto payeeDto){
+		ResponseData response = addPayeeService.addPayee(payeeDto);
+		return new ResponseEntity<>(response, response.getHttpStatus());
 	}
 	
 }
