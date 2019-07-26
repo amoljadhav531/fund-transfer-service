@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.hcl.fundtransfer.dto.FundTransferDto;
 import com.hcl.fundtransfer.dto.ResponseData;
 import com.hcl.fundtransfer.entity.Account;
+import com.hcl.fundtransfer.entity.Payee;
 import com.hcl.fundtransfer.entity.TransactionHistory;
 import com.hcl.fundtransfer.entity.UserDetails;
 import com.hcl.fundtransfer.repository.AccountRepository;
@@ -108,11 +109,11 @@ public class TransectionService {
 	}
 
 	public ResponseData getAllPayees(Long userId) {
-		List<UserDetails> payees = new ArrayList<>();
+		List<Payee> payees = new ArrayList<>();
 		ResponseData response = new ResponseData();
 		Optional<UserDetails> user = userRepository.findById(userId);
 		if (user.isPresent()) {
-			payees = payeeRepository.findByUserId(userId);
+			payees = payeeRepository.findByUserId(user.get());
 			response.setMessage("Payees for your are: ");
 			response.setHttpStatus(HttpStatus.OK);
 			response.setData(payees);
