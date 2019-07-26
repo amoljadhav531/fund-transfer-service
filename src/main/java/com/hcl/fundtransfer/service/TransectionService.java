@@ -2,6 +2,7 @@ package com.hcl.fundtransfer.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -9,9 +10,11 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.hcl.fundtransfer.dto.FundTransferDto;
+import com.hcl.fundtransfer.dto.ResponseData;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.TransactionHistory;
 import com.hcl.fundtransfer.entity.UserDetails;
@@ -104,8 +107,20 @@ public class TransectionService {
 		return dateFormat.format(date);
 	}
 
-	public List<UserDetails> getAllPayees(Long userId) {
-		return payeeRepository.findByUserId(userId);
-
+	public ResponseData getAllPayees(Long userId) {
+		List<UserDetails> payees = new ArrayList<>();
+		ResponseData response = new ResponseData();
+		Optional<UserDetails> user = userRepository.findById(userId);
+		if (user.isPresent()) {
+			payees = payeeRepository.findByUserId(userId);
+			response.setMessage("Payees for your are: ");
+			response.setHttpStatus(HttpStatus.OK);
+			response.setData(payees);
+			return response;
+		}
+		
+		response.setMessage("Incorrect UserId");
+		response.setHttpStatus(HttpStatus.BAD_REQUEST);
+		return response;
 	}
 }
