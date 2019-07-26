@@ -2,6 +2,7 @@ package com.hcl.fundtransfer.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,7 +56,7 @@ public class UserDetails {
 	@NotNull
 	private LocalDate dob;
 	
-	@OneToOne(mappedBy = "userDetails")
+	@OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Account account;
 	

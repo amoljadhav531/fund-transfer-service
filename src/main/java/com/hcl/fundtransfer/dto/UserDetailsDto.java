@@ -36,7 +36,6 @@ public class UserDetailsDto {
 	private String gender;
 	
 	@NotNull
-	@NotBlank
 	private LocalDate dob;
 	
 }
