@@ -1,5 +1,7 @@
 package com.hcl.fundtransfer.dto;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,19 +22,12 @@ import lombok.Data;
  */
 @Data
 public class UserDetailsDto {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long userId;
 	
-	@NotNull
-	@NotBlank
-	@Length(min = 5, max = 15)
 	private String username;
 	
-	@NotNull
-	@NotBlank
 	private String password;
+	
+	private String conformPassword;
 	
 	@NotNull
 	@NotBlank
@@ -51,6 +46,6 @@ public class UserDetailsDto {
 	
 	@NotNull
 	@NotBlank
-	private String dob;
+	private LocalDate dob;
 	
 }
