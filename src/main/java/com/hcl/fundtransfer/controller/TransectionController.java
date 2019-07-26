@@ -33,18 +33,18 @@ public class TransectionController {
 	@Autowired
 	private TransectionService transectionService;
 
-	/*	*//**
-			 * Method used for API mapping to URL /payees/{userName}
-			 * 
-			 * @param userName login user name
-			 * @return List<Payee> List of payee objects
-			 *//*
-				 * @GetMapping("/payees/{userName}") public ResponseEntity<List<PayeeDto>>
-				 * getAllPayees(@PathVariable @NotBlank @Size(max = 15) String userName){ return
-				 * new
-				 * ResponseEntity<>(transectionService.getAllPayees(userName),HttpStatus.OK); }
-				 */
-
+	
+	/**
+	 * Method used for API mapping to URL /payees/{userName}
+	 * @param userName login user name
+	 * @return List<Payee> List of payee objects
+	 */
+	@GetMapping("/payee/{userId}")
+	public  ResponseEntity<Object> getAllPayees(@PathVariable Long userId){
+		return new ResponseEntity<>(transectionService.getAllPayees(userId),HttpStatus.OK);
+	}
+	
+	
 	/**
 	 * Method used for API mapping to URL /fundtransfer
 	 * 
