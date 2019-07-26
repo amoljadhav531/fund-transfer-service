@@ -28,9 +28,13 @@ public class TransactionValidationServiceImpl implements TransactionValidationSe
 		if (payeeOptional.isPresent()) {
 			Payee payee = payeeOptional.get();
 			if (payee.getOtp() == otp) {
-				payee.setStatus("Success");
-				payee.setOtp(0);
-				payeeRepository.save(payee);
+				if (!payee.getStatus().equalsIgnoreCase("Success")) {
+					payee.setStatus("Success");
+					payee.setOtp(0);
+					payeeRepository.save(payee);
+				} else {
+					payeeRepository.delete(payee);
+				}
 				response.setMessage("Transaction Successful");
 				response.setHttpStatus(HttpStatus.OK);
 				return response;
