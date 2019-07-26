@@ -26,9 +26,6 @@ public class Account {
 	@Column(name = "account_number")
 	private long accountNumber;
 
-	@Column(name = "account_holder")
-	private String accountHolder;
-
 	private double balance;
 
 	private String ifscCode;
