@@ -58,7 +58,7 @@ public class UserService {
 	 * @return
 	 */
 	public boolean userExist(String userName) {
-		return userRepository.existsById(userName);
+		return userRepository.existsById(111l);
 	}
 
 	/**
